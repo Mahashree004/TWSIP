@@ -3,21 +3,16 @@ from nltk.chat.util import Chat, reflections
 import pyttsx3
 from textblob import TextBlob
 
-# Define the patterns and responses for the chatbot
+
 patterns = [
     (r'hi|hello|hey', ['Hello!', 'Hi there!', 'Hey!']),
     (r'how are you?', ['I am good, thank you!', 'I\'m doing well, thanks for asking.']),
-    (r'what is your name?', ['I am just an AI chatbot']),
-    # Add more patterns and responses as needed
+    (r'what is your name?', ['I am just an AI chatbot'])
 ]
-
-# Create a chatbot using the patterns
 chatbot = Chat(patterns, reflections)
 
-# Initialize text-to-speech engine
 engine = pyttsx3.init()
 
-# Define a function to analyze sentiment and respond accordingly
 def analyze_sentiment(text):
     blob = TextBlob(text)
     sentiment_score = blob.sentiment.polarity
@@ -32,7 +27,7 @@ def analyze_sentiment(text):
     else:
         return "Your sentiment is neutral. How can I assist you further?"
 
-# Define a function to interact with the chatbot using text input
+
 def chat_with_bot_text():
     print("Welcome to the Chatbot. Type your message to interact or type 'quit' to end the conversation.")
     while True:
@@ -57,12 +52,11 @@ def chat_with_bot_text():
             print("Chatbot:", response)
             speak(response)
 
-# Define a function to make the chatbot speak
+
 def speak(text):
     engine.say(text)
     engine.runAndWait()
 
-# Main function to run the chatbot
 if __name__ == "__main__":
     nltk.download('punkt')
     nltk.download('averaged_perceptron_tagger')
