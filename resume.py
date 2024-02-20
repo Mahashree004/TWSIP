@@ -1,7 +1,7 @@
 import spacy
 import re
 
-# Load English tokenizer, tagger, parser, NER, and word vectors
+
 nlp = spacy.load("en_core_web_sm")
 
 def resume_parser(text):
@@ -12,7 +12,6 @@ def resume_parser(text):
             entities[ent.label_] = [ent.text]
         else:
             entities[ent.label_].append(ent.text)
-    # Add Projects and Certifications fields to parsed entities
     projects = re.findall(r'-\s([\w\s]+)', text)
     entities['PROJECTS'] = projects
     certifications = re.findall(r'[-\s]([A-Za-z\s]+Certification)', text)
@@ -30,7 +29,6 @@ def validate_phone_number(text):
     return phone_numbers
 
 def extract_skills(text):
-    # Placeholder function for extracting skills
     skills = ["Python", "Java", "SQL", "Machine Learning", "Data Analysis","Cloud Security"]
     extracted_skills = []
     for skill in skills:
@@ -102,13 +100,13 @@ def main():
     - Amazon Web Services(AWS) Solutions Architect - Associate
     """
 
-    # Perform resume parsing
+    
     parsed_entities = resume_parser(resume_text)
     emails = validate_email(resume_text)
     phone_numbers = validate_phone_number(resume_text)
     skills = extract_skills(resume_text)
 
-    # Construct separate dictionaries for each type of entity
+
     parsed_entities_dict = {}
     for key, values in parsed_entities.items():
         parsed_entities_dict[key] = values
@@ -119,7 +117,7 @@ def main():
     phone_numbers_dict = {"Phone Numbers": phone_numbers}
     skills_dict = {"Skills": skills}
 
-    # Construct the final output dictionary
+    
     resume_output = {
         "Name": "MAHA SHREE BASKARAN",
         "Role": "CLOUD ANALYST",
@@ -131,7 +129,7 @@ def main():
         **skills_dict
     }
 
-    # Print the formatted output
+
     print_resume_output(resume_output)
 
 if __name__ == "__main__":
